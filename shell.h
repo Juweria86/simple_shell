@@ -12,4 +12,5 @@
 #include <fcntl.h>
 #include <errno.h>
 
+void JNprint_fn(const char *Msg);
 #endif
