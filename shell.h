@@ -12,5 +12,12 @@
 #include <fcntl.h>
 #include <errno.h>
 
+#define BUFFER_SIZE 1024
+
 void JNprint_fn(const char *Msg);
+void prompt();
+char *u_input();
+void exec_cmd(char *command);
+char** parse_input(char* input);
+
 #endif
