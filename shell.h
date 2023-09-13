@@ -28,6 +28,9 @@ path_t *node_end(path_t **head, char *string);
 path_t *linkpath(char *path);
 char *_choose(char *fname, path_t *head);
 void free_path(path_t *head);
+void exit_t(char **av);
+int _atoi(char *s);
+int _atoi(char *s);
 
 /**
  * struct path_t - Linked list to path
