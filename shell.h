@@ -24,17 +24,21 @@ char *_strdup(char *str);
 int  _strlen(char *s);
 char *format(char *N, char *sep, char *val);
 
+path_t *node_end(path_t **head, char *string);
+path_t *linkpath(char *path);
+char *_choose(char *fname, path_t *head);
+void free_path(path_t *head);
 
 /**
- * struct path - Linked list to path
+ * struct path_t - Linked list to path
  * @dir: directory in path
  * @ptr: pointer to next node
  */
 
-typedef struct path
+typedef struct path_t
 {
 	char *dir;
-	struct path *ptr;
-} path;
+	struct path_t *ptr;
+} path_t;
 
 #endif
