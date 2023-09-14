@@ -109,5 +109,3 @@ void free_path(path_t *head)
 		head = tmp;
 	}
 }
-
-

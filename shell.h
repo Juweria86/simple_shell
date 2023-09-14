@@ -18,19 +18,22 @@
 void JNprint_fn(const char *Msg);
 void prompt(void);
 char *u_input();
-void exec_cmd(char *command);
+void exec_cmd(char *args[]);
 char **parse_input(char *input);
+void handle_command_with_arguments(char *input);
 char *_strdup(char *str);
 int  _strlen(char *s);
 char *format(char *N, char *sep, char *val);
-
-path_t *node_end(path_t **head, char *string);
-path_t *linkpath(char *path);
-char *_choose(char *fname, path_t *head);
-void free_path(path_t *head);
+int _strcmp(char *s1, char *s2);
 void exit_t(char **av);
 int _atoi(char *s);
-int _atoi(char *s);
+
+/**
+ * path_t *node_end(path_t **head, char *string);
+ * path_t *linkpath(char *path);
+ * *char *_choose(char *fname, path_t *head);
+ *  void free_path(path_t *head);
+ */
 
 /**
  * struct path_t - Linked list to path
@@ -38,10 +41,12 @@ int _atoi(char *s);
  * @ptr: pointer to next node
  */
 
-typedef struct path_t
-{
-	char *dir;
-	struct path_t *ptr;
-} path_t;
+/**
+ * typedef struct path_t
+ * {
+ * char *dir;
+ * struct path_t *ptr;
+ * } path_t;
+*/
 
 #endif

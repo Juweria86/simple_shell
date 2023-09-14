@@ -30,27 +30,27 @@ char *u_input()
 }
 /**
  * exec_cmd - exutes a command
- * @command: command to be executed
+ * @args: commands to be executed
  */
-void exec_cmd(char *command)
+void exec_cmd(char *args[])
 {
 	pid_t pid = fork();
 
 	if (pid == 0)
 	{
-		char *argv[2];
-
-		argv[0] = command;
-		argv[1] = NULL;
-
-		if (execve(command, argv, NULL) == -1)
+		if (execve(args[0], args, NULL) == -1)
 		{
-			perror("./hsh");
+			perror("Command not found");
 			exit(1);
 		}
 	}
 	else if (pid > 0)
+	{
 		wait(NULL);
+	}
 	else
-		perror("./hsh");
+	{
+		perror("Fork error");
+		exit(1);
+	}
 }

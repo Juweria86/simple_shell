@@ -6,7 +6,6 @@
 int main(void)
 {
 	char *input;
-	char **args;
 
 	while (1)
 	{
@@ -14,18 +13,17 @@ int main(void)
 		input = u_input();
 		if (input == NULL)
 			break;
-
-		args = parse_input(input);
-		if (args[0] == NULL)
+		if (_strcmp(input, "exit") == 0)
 		{
-			free(input);
-			free(args);
-			continue;
+			char *args[2];
+
+			args[0] = "exit";
+			args[1] = NULL;
+			exit_t(args);
 		}
 
-		exec_cmd(args[0]);
+		handle_command_with_arguments(input);
 		free(input);
-		free(args);
 	}
 	return (0);
 }

@@ -6,36 +6,44 @@
  */
 char **parse_input(char *input)
 {
-	char **args = NULL;
+	const char *delimiters = " \t\r\n\a";
+	const int max_args = 64;
+	char **args = malloc(max_args * sizeof(char *));
+	int arg_count = 0;
 	char *token;
-	const char delim[] = " \t\n";
-	int bufsize = 64;
-	int position = 0;
 
-	args = malloc(bufsize * sizeof(char *));
 	if (args == NULL)
 	{
-		fprintf(stderr, "Allocation error\n");
+		perror("malloc error");
 		exit(1);
 	}
-	token = strtok(input, delim);
+	token = strtok(input, delimiters);
+
 	while (token != NULL)
 	{
-		args[position] = token;
-		position++;
-
-		if (position >= bufsize)
+		args[arg_count] = token;
+		arg_count++;
+		if (arg_count >= max_args)
 		{
-			bufsize += 64;
-			args = realloc(args, bufsize * sizeof(char *));
-			if (args == NULL)
-			{
-				fprintf(stderr, "Allocation error\n");
-				exit(1);
-			}
+			perror("Too many arguments\n");
+			exit(1);
 		}
-		token = strtok(NULL, delim);
+		token = strtok(NULL, delimiters);
 	}
-	args[position] = NULL;
+	args[arg_count] = NULL;
 	return (args);
+}
+/**
+ * handle_command_with_arguments - handles commands with args.
+ * @input: command to be handled.
+ */
+void handle_command_with_arguments(char *input)
+{
+	char **args = parse_input(input);
+
+	if (args[0] != NULL)
+	{
+		exec_cmd(args);
+	}
+	free(args);
 }

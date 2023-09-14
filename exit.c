@@ -6,7 +6,7 @@
  */
 void exit_t(char **av)
 {
-	int i, j;
+	int j;
 
 	if (av[1])
 	{
@@ -16,8 +16,5 @@ void exit_t(char **av)
 		free(av);
 		exit(j);
 	}
-	for (i = 0; av[i]; i++)
-		free(av[i]);
-	free(av);
 	exit(0);
 }
