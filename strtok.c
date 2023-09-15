@@ -7,7 +7,7 @@
  * Return: the delimiter index
  */
 
-int token_length(char *s, char *delim)
+int token_length(char *s, const char *delim)
 {
 	int length = 0, i = 0;
 
@@ -26,7 +26,7 @@ int token_length(char *s, char *delim)
  * @delim: delimiter of char
  * Return: the num  of words
  */
-int token_count(char *s, char *delim)
+int token_count(char *s, const char *delim)
 {
 	int length = 0;
 	int i, tokens = 0;
@@ -51,7 +51,7 @@ int token_count(char *s, char *delim)
  * @delim: delimiter of char
  * Return: pointer of array
  */
-char **_strtok(char *ln, char *delim)
+char *_strtok(char *ln, const char *delim)
 {
 	int i = 0;
 	int tokens, j, k, ler;
@@ -86,5 +86,5 @@ char **_strtok(char *ln, char *delim)
 	p[k] = '\0';
 	p[k + 1] = '\0';
 
-	return (p);
+	return (*p);
 }

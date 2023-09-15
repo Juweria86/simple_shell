@@ -55,7 +55,7 @@ int _env(char **args, char __attribute__((__unused__)) **p);
 int _setenv(char **args, char __attribute__((__unused__)) **p);
 int _unsetenv(char **args, char __attribute__((__unused__)) **p);
 
-int token_length(char *s, char *delim);
-int token_count(char *s, char *delim);
-char **_strtok(char *ln, char *delim);
+int token_length(char *s, const char *delim);
+int token_count(char *s, const char *delim);
+char *_strtok(char *ln, const char *delim);
 #endif

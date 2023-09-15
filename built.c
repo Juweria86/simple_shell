@@ -18,7 +18,7 @@ int _env(char **args, char __attribute__((__unused__)) **p)
 	for (i = 0; environ[i]; i++)
 	{
 		void JNprint_fn(const char *environ);
-		write(STDOUT_FILENO, &nc, 1);
+		write(STDOUT_FILENO, &c, 1);
 	}
 
 	(void)args;
