@@ -49,44 +49,21 @@ int _strlen(char *s)
 }
 
 /**
- * format - concat three string
- * @N: first string
- * @sep: second string
- * @val: third string
- * Return: a pointer of new string
+ * _strcpy - copies atring
+ * @dest: pointer to dest string
+ * @src: pointer to source string
+ * Return: pointer to dest
  */
-
-char *format(char *N, char *sep, char *val)
+char *_strcpy(char *dest,const char *src)
 {
-	char *new_string;
-	int M, V, K, j, i;
+	size_t i = 0;
 
-	M = _strlen(N);
-	V = _strlen(sep);
-	K = _strlen(val);
-
-	new_string = malloc(M + V + K + 1);
-
-	if (!new_string)
-		return (NULL);
-
-	for (i = 0; N[i] != '\0'; i++)
-		new_string[i] = N[i];
-
-	j = i;
-
-	for (i = 0; sep[i] != '\0'; i++)
-		new_string[j + i] = sep[i];
-	j += i;
-
-	for (i = 0; val[i] != '\0'; i++)
-		new_string[j + i] = val[i];
-	j += i;
-
-	new_string[j] = '\0';
-
-	return (new_string);
+	for (i = 0; src[i] != '\0'; i++)
+		dest[i] = src[i];
+	dest[i] = '\0';
+	return (dest);
 }
+
 
 /**
  * _atoi - converts a string into an integer
@@ -140,4 +117,40 @@ int _strcmp(char *s1, char *s2)
 		i++;
 	}
 	return (0);
+}
+/**
+ * _strcat - concantenates 2 strings
+ * @dest: pointer to dest string.
+ * @src: pointer to source string.
+ * Return: pointer to dest.
+ */
+char *_strcat(char *dest, const char *src)
+{
+	char *tmp = dest;
+
+	while (*dest)
+		dest++;
+	while (*src)
+		*dest++ = *src++;
+	*dest = *src;
+	return (tmp);
+}
+
+/**
+ * _strncat - concantenates 2 strings where n numer
+ * @dest: pointer to dest str
+ * @src: pointer to src str
+ * @n: n copy
+ * Return: pointer to dest
+ */
+char *_strncat(char *dest, const char *src, size_t n)
+{
+	size_t dlen = _strlen(dest);
+	size_t i;
+
+	for (i = 0; i < n && src[i] != '\0'; i++)
+		dest[dlen + i] = src[i];
+	dest[dlen + i] = '\0';
+
+	return (dest);
 }

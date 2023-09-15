@@ -7,21 +7,21 @@
  * @string: pointer of previous string
  * Return: pointer of new node
  */
-path_t *node_end(path_t **head, char *string)
+list_t *node_end(list_t **head, char *dir)
 {
-	path_t *tmp;
-	path_t *new;
+	list_t *tmp;
+	list_t *new;
 
-	new = malloc(sizeof(path_t));
+	new = malloc(sizeof(list_t));
 
-	if (!new || !string)
+	if (!new)
 		return (NULL);
 
-	new->dir = string;
+	new->dir = dir;
 
 	new->ptr = '\0';
 
-	if (!head)
+	if (!*head)
 	{
 		*head = new;
 	}
@@ -30,82 +30,137 @@ path_t *node_end(path_t **head, char *string)
 	{
 		tmp = *head;
 
-		while (tmp->ptr)
+		while (tmp->ptr != NULL)
 		{
 			tmp = tmp->ptr;
 		}
 
 		tmp->ptr = new;
 	}
-	return (*head);
-}
-
-
-/**
- * linkpath - create linked list for path
- * @path: string of path
- * Return: pointer
- */
-
-path_t *linkpath(char *path)
-{
-	path_t *head = '\0';
-	path_t *token;
-	path_t *cpath = _strdup(path);
-
-	token = strtok(cpath, ":");
-
-	while (token)
-	{
-		head =  node_end(&head, token);
-		token = strtok(NULL, ":");
-	}
-
-	return (head);
+	return (new);
 }
 
 /**
- * _choose - search of path
- * @fname: file of path
- * @head: head of linkedlist of path dir
- * Return: path or null or not match
+ * find_path - locates a command in the path
+ * @cmd: command to locate
+ * Return: NULL or the fullpath
  */
 
-char *_choose(char *fname, path_t *head)
+char *find_path(char *cmd)
 {
-	struct stat str;
-	char *s;
+	char **path, *tmp;
+	list_t *head, *dir;
+	struct stat st;
 
-	path_t *tmp = head;
+	path = _getenv("PATH");
+	if (!path || !(*path))
+		return (NULL);
 
-	while (tmp)
+	dir = find_dir(*path + 5);
+	head = dir;
+
+	while (dir)
 	{
-		s = format(tmp->dir, "/", fname);
+		tmp = malloc(_strlen(dir->dir) + _strlen(cmd) + 2);
+		if (!tmp)
+			return (NULL);
 
-		if (stat(s, &str) == 0)
+		_strcpy(tmp, dir->dir);
+		_strcat(tmp, "/");
+		_strcat(tmp, cmd);
+
+		if (stat(tmp, &st) == 0)
 		{
-			return (s);
+			free_lt(head);
+			return (tmp);
 		}
-		free(s);
-		tmp = tmp->ptr;
+
+		dir = dir->ptr;
+		free(tmp);
 	}
+	free_lt(head);
 	return (NULL);
 }
 
 /**
- * free_path - free path
- *@head: pointer of linkedlist
+ * copy_path - copy path
+ * @path: list of dirs
+ * Return: a copy of path
  */
-
-void free_path(path_t *head)
+char *copy_path(char *path)
 {
-	path_t *tmp;
+	int i, len = 0;
+	char *cpath, *pwd;
 
-	while (head)
+	pwd = *(_getenv("PWD")) + 4;
+	for (i = 0; path[i]; i++)
 	{
-		tmp = head->ptr;
-		free(head->dir);
-		free(head);
-		head = tmp;
+		if (path[i] == ':')
+		{
+			if (path[i + 1] == ':' || i == 0 || path[i + 1] == '\0')
+				len += _strlen(pwd) + 1;
+			else
+				len++;
+		}
+		else
+			len++;
 	}
+	cpath = malloc(sizeof(char) * (len + 1));
+
+	if (!cpath)
+		return (NULL);
+	cpath[0] = '\0';
+
+	for (i = 0; path[i]; i++)
+	{
+		if (path[i] == ':')
+		{
+			if (i == 0)
+			{
+				_strcat(cpath, ":");
+				_strcat(cpath, pwd);
+			}
+			else
+				_strcat(cpath, ":");
+		}
+		else
+		{
+			_strncat(cpath, &path[i], 1);
+		}
+	}
+	return (cpath);
+}
+
+/**
+ * find_dir - tokenizes list of dirs
+ * @path: list of dirs
+ * Return: pointer of the init linked list
+ */
+list_t *find_dir(char *path)
+{
+	int i;
+	char **dirs, *cpath;
+	list_t *head = NULL;
+
+	cpath = copy_path(path);
+
+	if (!cpath)
+		return (NULL);
+	dirs = strtok(cpath, ":");
+	free(cpath);
+	if (!dirs)
+		return (NULL);
+
+	for (i = 0; dirs[i]; i++)
+	{
+		if (node_end(&head, dirs[i]) == NULL)
+		{
+			free_lt(head);
+			free(dirs);
+			return (NULL);
+		}
+	}
+	free(dirs);
+
+	return (head);
 }
