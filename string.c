@@ -154,3 +154,28 @@ char *_strncat(char *dest, const char *src, size_t n)
 
 	return (dest);
 }
+/**
+ * _strncmp - compare 2 strings
+ * @s1: pointer to str1
+ * @s2: pointer to st2
+ * @n: n of strings to compare
+ * Return: 0 or s1 or s2
+ */
+
+int _strncmp(const char *s1, const char *s2, size_t n)
+{
+	size_t i;
+
+	for (i = 0; s1[i] && s2[i] && i < n; i++)
+	{
+		if (s1[i] > s2[i])
+			return (s1[i] - s2[i]);
+		else if (s1[i] < s2[i])
+			return (s1[i] - s2[i]);
+	}
+	if (i == n)
+		return (0);
+	else
+		return (-15);
+}
+

@@ -14,6 +14,7 @@
 
 #define BUFFER_SIZE 1024
 #define BUFFER_FLUSH -1
+extern char **environ;
 
 /**
  * struct list_s - Linked list to path
@@ -37,6 +38,7 @@ char *_strdup(char *str);
 int  _strlen(char *s);
 char *_strcpy(char *dest, const char *src);
 int _strcmp(char *s1, char *s2);
+int _strncmp(const char *s1, const char *s2, size_t n);
 void exit_t(char **av);
 int _atoi(char *s);
 char *_strcat(char *dest, const char *src);
@@ -47,4 +49,5 @@ list_t *node_end(list_t **head, char *dir);
 char *find_path(char *cmd);
 char *copy_path(char *path);
 list_t *find_dir(char *path);
+char **_getenv(char *var);
 #endif

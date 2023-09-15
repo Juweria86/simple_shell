@@ -16,3 +16,21 @@ void free_lt(list_t *head)
 		head = tmp;
 	}
 }
+
+/**
+ * _getenv - gets an environmental variale
+ * @var: name of variale
+ * Return: pointer to env var or NULL
+ */
+char **_getenv(char *var)
+{
+	int i, len;
+
+	len = _strlen(var);
+	for (i = 0; environ[i]; i++)
+	{
+		if (_strncmp(var, environ[i], len) == 0)
+			return (&environ[i]);
+	}
+	return (NULL);
+}
