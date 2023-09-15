@@ -28,7 +28,7 @@ char **parse_input(char *input)
 			perror("Too many arguments\n");
 			exit(1);
 		}
-		token = strtok(NULL, delimiters);
+		token = _strtok(NULL, delimiters);
 	}
 	args[arg_count] = NULL;
 	return (args);

@@ -146,7 +146,7 @@ list_t *find_dir(char *path)
 
 	if (!cpath)
 		return (NULL);
-	dirs = strtok(cpath, ":");
+	dirs = _strtok(cpath, ":");
 	free(cpath);
 	if (!dirs)
 		return (NULL);

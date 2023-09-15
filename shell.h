@@ -50,4 +50,12 @@ char *find_path(char *cmd);
 char *copy_path(char *path);
 list_t *find_dir(char *path);
 char **_getenv(char *var);
+
+int _env(char **args, char __attribute__((__unused__)) **p);
+int _setenv(char **args, char __attribute__((__unused__)) **p);
+int _unsetenv(char **args, char __attribute__((__unused__)) **p);
+
+int token_length(char *s, char *delim);
+int token_count(char *s, char *delim);
+char **_strtok(char *ln, char *delim);
 #endif
