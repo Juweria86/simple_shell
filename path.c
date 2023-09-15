@@ -139,7 +139,7 @@ char *copy_path(char *path)
 list_t *find_dir(char *path)
 {
 	int i;
-	char **dirs, *cpath;
+	char *dirs, *cpath;
 	list_t *head = NULL;
 
 	cpath = copy_path(path);
@@ -153,7 +153,7 @@ list_t *find_dir(char *path)
 
 	for (i = 0; dirs[i]; i++)
 	{
-		if (node_end(&head, dirs[i]) == NULL)
+		if (node_end(&head, dirs) == NULL)
 		{
 			free_lt(head);
 			free(dirs);
