@@ -39,12 +39,18 @@ int _setenv(char **args, char __attribute__((__unused__)) **p)
 	size_t j;
 
 	if (!args[0] || !args[1])
-		return (cerror(args, -1));
+	{
+		perror("Incorrect number of arguements\n");
+		return (1);
+	}
 
 	val = malloc(_strlen(args[0]) + 1 + _strlen(args[1]) + 1);
 
 	if (!val)
-		return (cerror(args, -1));
+	{
+		perror("Error\n");
+		return (1);
+	}
 	_strcpy(val, args[0]);
 	_strcat(val, "=");
 	_strcat(val, args[1]);
@@ -63,7 +69,8 @@ int _setenv(char **args, char __attribute__((__unused__)) **p)
 	if (!new)
 	{
 		free(val);
-		return (cerror(args, -1));
+		perror("Unable to add/remove from environment\n");
+		return (1);
 	}
 	for (i = 0; environ[i]; i++)
 		new[i] = environ[i];
@@ -88,7 +95,10 @@ int _unsetenv(char **args, char __attribute__((__unused__)) **p)
 	char **env, **new;
 
 	if (!args[0])
-		return (cerror(args, -1));
+	{
+		perror("Incorrect number of arguements\n");
+		return (1);
+	}
 	env = _getenv(args[0]);
 
 	if (!env)
@@ -98,7 +108,10 @@ int _unsetenv(char **args, char __attribute__((__unused__)) **p)
 		;
 	new = malloc(sizeof(char *) * size);
 	if (!new)
-		return (cerror(args, -1));
+	{
+		perror("Unable to add/remove from environment\n");
+		return (1);
+	}
 
 	for (i = 0, j = 0; environ[i]; i++)
 	{

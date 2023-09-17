@@ -28,6 +28,19 @@ typedef struct list_s
 	struct list_s *ptr;
 } list_t;
 
+/**
+ * struct builtin_t - defining on command
+ * @name: name of command
+ * @j: a function pointer
+ */
+typedef struct builtin_t
+{
+	char *name;
+	int (*j)(char **argv, char **p);
+} builtin_t;
+
+int (*_builtin(char *cmd))(char **args, char **p);
+void exit_t(char **av);
 void JNprint_fn(const char *Msg);
 void prompt(void);
 char *u_input();
@@ -39,7 +52,7 @@ int  _strlen(char *s);
 char *_strcpy(char *dest, const char *src);
 int _strcmp(char *s1, char *s2);
 int _strncmp(const char *s1, const char *s2, size_t n);
-void exit_t(char **av);
+int exit_arg(char **args, char __attribute__((__unused__)) **p);
 int _atoi(char *s);
 char *_strcat(char *dest, const char *src);
 char *_strncat(char *dest, const char *src, size_t n);
