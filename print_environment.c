@@ -15,7 +15,6 @@ int _myenv(data_t *info)
  * _getenv - gets the value of an environ variable
  * @info: Structure containing potential arguments. Used to maintain
  * @name: env var name
- *
  * Return: the value
  */
 char *_getenv(data_t *info, const char *name)
