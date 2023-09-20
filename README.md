@@ -4,7 +4,7 @@
 
 This is a group project where we collaborate to build a simple shell.
 
-## To complete this project using:
+## To complete this project we used:
 
 * C language
 * shell
