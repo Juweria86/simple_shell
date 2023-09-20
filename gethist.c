@@ -3,7 +3,6 @@
 /**
  * get_history - gets the history file
  * @info: parameter struct
- *
  * Return: allocated string containg history file
  */
 
@@ -27,7 +26,6 @@ char *get_history(data_t *info)
 /**
  * write_history - creates a file, or appends to an existing file
  * @info: the parameter struct
- *
  * Return: 1 on success, else -1
  */
 int write_history(data_t *info)
