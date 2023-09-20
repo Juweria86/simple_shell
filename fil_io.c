@@ -3,7 +3,6 @@
  * replace_string - replaces string
  * @old: address of old string
  * @new: new string
- *
  * Return: 1 if replaced, 0 otherwise
  */
 int replace_string(char **old, char *new)
@@ -15,7 +14,6 @@ int replace_string(char **old, char *new)
 /**
  * replace_alias - replaces an aliases in the tokenized string
  * @info: the parameter struct
- *
  * Return: 1 if replaced, 0 otherwise
  */
 int replace_alias(data_t *info)
@@ -43,7 +41,6 @@ int replace_alias(data_t *info)
 /**
  * replace_vars - replaces vars in the tokenized string
  * @info: the parameter struct
- *
  * Return: 1 if replaced, 0 otherwise
  */
 int replace_vars(data_t *info)
@@ -88,7 +85,6 @@ int replace_vars(data_t *info)
  * @p: address of current position in buf
  * @i: starting position in buf
  * @len: length of buf
- *
  * Return: Void
  */
 void check_chain(data_t *info, char *buf, size_t *p, size_t i, size_t len)
@@ -121,7 +117,6 @@ void check_chain(data_t *info, char *buf, size_t *p, size_t i, size_t len)
  * @info: the parameter struct
  * @buf: the char buffer
  * @p: address of current position in buf
- *
  * Return: 1 if chain delimeter, 0 otherwise
  */
 int is_chain(data_t *info, char *buf, size_t *p)
@@ -140,9 +135,9 @@ int is_chain(data_t *info, char *buf, size_t *p)
 		j++;
 		info->cmd_buf_type = CMD_AND;
 	}
-	else if (buf[j] == ';') /* found end of this command */
+	else if (buf[j] == ';')
 	{
-		buf[j] = 0; /* replace semicolon with null */
+		buf[j] = 0; 
 		info->cmd_buf_type = CMD_CHAIN;
 	}
 	else
