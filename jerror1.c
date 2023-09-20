@@ -103,7 +103,7 @@ char *cmd_notfound(data_shell *datash)
 	_strcat(error, ver_str);
 	_strcat(error, ": ");
 	_strcat(error, datash->args[0]);
-	_strcat(error, ":command not found\n");
+	_strcat(error, ": command not found\n");
 	_strcat(error, "\0");
 	free(ver_str);
 	return (error);
