@@ -1,90 +1,94 @@
 #include "shell.h"
 
 /**
- * token_length - locates the delimiter index
- * @s: the string
- * @delim: delimiter of char
- * Return: the delimiter index
+ * **_strtok - splits a string into words. Repeat delimiters are ignored
+ * @str: the input string
+ * @d: the delimeter string
+ * Return: a pointer to an array of strings, or NULL on failure
  */
 
-int token_length(char *s, const char *delim)
+char **_strtok(char *str, char *d)
 {
-	int length = 0, i = 0;
+	int i, j, k, m, numwords = 0;
+	char **s;
 
-	while (*(s + i) && *(s + i) != *delim)
-	{
-		length++;
-		i++;
-	}
-
-	return (length);
-}
-
-/**
- * token_count - counts the num of delim
- * @s: the string
- * @delim: delimiter of char
- * Return: the num  of words
- */
-int token_count(char *s, const char *delim)
-{
-	int length = 0;
-	int i, tokens = 0;
-
-	for (i = 0; *(s + i); i++)
-		length++;
-
-	for (i = 0; i < length; i++)
-	{
-		if (*(s + i) != *delim)
-		{
-			tokens++;
-			i += token_length(s + i, delim);
-		}
-	}
-	return (tokens);
-}
-
-/**
- * _strtok - tokenizes a string
- * @ln: the string
- * @delim: delimiter of char
- * Return: pointer of array
- */
-char *_strtok(char *ln, const char *delim)
-{
-	int i = 0;
-	int tokens, j, k, ler;
-	char **p;
-
-	tokens = token_count(ln, delim);
-	if (tokens == 0)
+	if (str == NULL || str[0] == 0)
 		return (NULL);
-	p = malloc(sizeof(char *) * (tokens + 2));
-	if (!p)
+	if (!d)
+		d = " ";
+	for (i = 0; str[i] != '\0'; i++)
+		if (!is_delim(str[i], d) && (is_delim(str[i + 1], d) || !str[i + 1]))
+			numwords++;
+
+	if (numwords == 0)
 		return (NULL);
-	for (k = 0; k < tokens; k++)
+	s = malloc((1 + numwords) * sizeof(char *));
+	if (!s)
+		return (NULL);
+	for (i = 0, j = 0; j < numwords; j++)
 	{
-		while (ln[i] == *delim)
+		while (is_delim(str[i], d))
 			i++;
-		ler = token_length(ln + i, delim);
-		p[k] = malloc(sizeof(char *) * (ler + 1));
-		if (!p[k])
+		k = 0;
+		while (!is_delim(str[i + k], d) && str[i + k])
+			k++;
+		s[j] = malloc((k + 1) * sizeof(char));
+		if (!s[j])
 		{
-			for (i -= 1; i >= 0; i--)
-				free(p[i]);
-			free(p);
+			for (k = 0; k < j; k++)
+				free(s[k]);
+			free(s);
 			return (NULL);
 		}
-		for (j = 0; j < ler; j++)
-		{
-			p[k][j] = ln[i];
-			i++;
-		}
-		p[k][j] = '\0';
+		for (m = 0; m < k; m++)
+			s[j][m] = str[i++];
+		s[j][m] = 0;
 	}
-	p[k] = '\0';
-	p[k + 1] = '\0';
+	s[j] = NULL;
+	return (s);
+}
 
-	return (*p);
+/**
+ * **_strtok2 - splits a string into words
+ * @str: the input string
+ * @d: the delimeter
+ * Return: a pointer to an array of strings, or NULL on failure
+ */
+char **_strtok2(char *str, char d)
+{
+	int i, j, k, m, numwords = 0;
+	char **s;
+
+	if (str == NULL || str[0] == 0)
+		return (NULL);
+	for (i = 0; str[i] != '\0'; i++)
+		if ((str[i] != d && str[i + 1] == d) ||
+		    (str[i] != d && !str[i + 1]) || str[i + 1] == d)
+			numwords++;
+	if (numwords == 0)
+		return (NULL);
+	s = malloc((1 + numwords) * sizeof(char *));
+	if (!s)
+		return (NULL);
+	for (i = 0, j = 0; j < numwords; j++)
+	{
+		while (str[i] == d && str[i] != d)
+			i++;
+		k = 0;
+		while (str[i + k] != d && str[i + k] && str[i + k] != d)
+			k++;
+		s[j] = malloc((k + 1) * sizeof(char));
+		if (!s[j])
+		{
+			for (k = 0; k < j; k++)
+				free(s[k]);
+			free(s);
+			return (NULL);
+		}
+		for (m = 0; m < k; m++)
+			s[j][m] = str[i++];
+		s[j][m] = 0;
+	}
+	s[j] = NULL;
+	return (s);
 }
