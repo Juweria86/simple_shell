@@ -87,3 +87,28 @@ int _myhelp(data_t *info)
 		_puts(*arg_array); /* temp att_unused workaround */
 	return (0);
 }
+
+/**
+ * _builtin - match a command
+ * @cmd: the command
+ * Return: a function pointer
+ */
+int (*_builtin(char *cmd))(char **args, char **p)
+{
+	builtin_t func[] = {
+		{ "exit", exit_arg },
+		{ "setenv", _setenv },
+		{ "env", _env },
+		{ "unsetenv", _unsetenv },
+		{ NULL, NULL}
+	};
+	int i;
+
+	for (i = 0; func[i].name; i++)
+	{
+		if (_strcmp(func[i].name, cmd) == 0)
+			break;
+	}
+
+	return (func[i].j);
+}
