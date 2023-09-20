@@ -51,7 +51,6 @@ typedef struct liststr
 } list_t;
 
 /**
-<<<<<<< HEAD
  *struct data - contains pseudo-arguements to pass into a function,
  *		allowing uniform prototype for function pointer struct
  *@arg: a string generated from getline containing arguements
@@ -89,36 +88,6 @@ typedef struct data
 	char **environ;
 	int env_changed;
 	int status;
-=======
- * struct builtin_t - defining on command
- * @name: name of command
- * @j: a function pointer
- */
-typedef struct builtin_t
-{
-	char *name;
-	int (*j)(char **argv, char **p);
-} builtin_t;
-
-int (*_builtin(char *cmd))(char **args, char **p);
-void exit_t(char **av);
-void JNprint_fn(const char *Msg);
-void prompt(void);
-char *u_input();
-void exec_cmd(char *args[]);
-char **parse_input(char *input);
-void handle_command_with_arguments(char *input);
-char *_strdup(char *str);
-int  _strlen(char *s);
-char *_strcpy(char *dest, const char *src);
-int _strcmp(char *s1, char *s2);
-int _strncmp(const char *s1, const char *s2, size_t n);
-int exit_arg(char **args, char __attribute__((__unused__)) **p);
-int _atoi(char *s);
-char *_strcat(char *dest, const char *src);
-char *_strncat(char *dest, const char *src, size_t n);
-void free_lt(list_t *head);
->>>>>>> 84a329d609464af9a0b319c7c24ca1b44069351d
 
 	char **cmd_buf;
 	int cmd_buf_type;
@@ -243,3 +212,4 @@ int replace_vars(data_t *);
 int replace_string(char **, char *);
 
 #endif
+
