@@ -1,14 +1,14 @@
 #include "shell.h"
 
 /**
- * cmp_env_name - compares env variables names
+ * env_var - compares env variables names
  * with the name passed.
  * @nenv: name of the environment variable
  * @name: name passed
  *
  * Return: 0 if are not equal. Another value if they are.
  */
-int cmp_env_name(const char *nenv, const char *name)
+int env_var(const char *nenv, const char *name)
 {
 	int i;
 
@@ -44,7 +44,7 @@ char *_getenv(const char *name, char **_environ)
 	for (i = 0; _environ[i]; i++)
 	{
 		/* If name and env are equal */
-		mov = cmp_env_name(_environ[i], name);
+		mov = env_var(_environ[i], name);
 		if (mov)
 		{
 			ptr_env = _environ[i];

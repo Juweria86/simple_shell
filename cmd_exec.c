@@ -2,12 +2,12 @@
 
 
 /**
- * is_cdir - checks ":" if is in the current directory.
+ * check_cdir - checks ":" if is in the current directory.
  * @path: type char pointer char.
  * @i: type int pointer of index.
  * Return: 1 if the path is searchable in the cd, 0 otherwise.
  */
-int is_cdir(char *path, int *i)
+int check_cdir(char *path, int *i)
 {
 	if (path[*i] == ':')
 		return (1);
@@ -24,13 +24,13 @@ int is_cdir(char *path, int *i)
 }
 
 /**
- * _which - locates a command
+ * loc_cmd - locates a command
  *
  * @cmd: command name
  * @_environ: environment variable
  * Return: location of the command.
  */
-char *_which(char *cmd, char **_environ)
+char *loc_cmd(char *cmd, char **_environ)
 {
 	char *path, *ptr_path, *token_path, *dir;
 	int len_dir, len_cmd, i;
@@ -45,7 +45,7 @@ char *_which(char *cmd, char **_environ)
 		i = 0;
 		while (token_path != NULL)
 		{
-			if (is_cdir(path, &i))
+			if (check_cdir(path, &i))
 				if (stat(cmd, &st) == 0)
 					return (cmd);
 			len_dir = _strlen(token_path);
@@ -74,12 +74,12 @@ char *_which(char *cmd, char **_environ)
 }
 
 /**
- * is_executable - determines if is an executable
+ * executable - determines if is an executable
  *
  * @datash: data structure
  * Return: 0 if is not an executable, other number if it does
  */
-int is_executable(data_shell *datash)
+int executable(data_shell *datash)
 {
 	struct stat st;
 	int i;
@@ -114,22 +114,22 @@ int is_executable(data_shell *datash)
 	{
 		return (i);
 	}
-	get_error(datash, 127);
+	_error(datash, 127);
 	return (-1);
 }
 
 /**
- * check_error_cmd - verifies if user has permissions to access
+ * check_error - verifies if user has permissions to access
  *
  * @dir: destination directory
  * @datash: data structure
  * Return: 1 if there is an error, 0 if not
  */
-int check_error_cmd(char *dir, data_shell *datash)
+int check_error(char *dir, data_shell *datash)
 {
 	if (dir == NULL)
 	{
-		get_error(datash, 127);
+		_error(datash, 127);
 		return (1);
 	}
 
@@ -137,7 +137,7 @@ int check_error_cmd(char *dir, data_shell *datash)
 	{
 		if (access(dir, X_OK) == -1)
 		{
-			get_error(datash, 126);
+			_error(datash, 126);
 			free(dir);
 			return (1);
 		}
@@ -147,7 +147,7 @@ int check_error_cmd(char *dir, data_shell *datash)
 	{
 		if (access(datash->args[0], X_OK) == -1)
 		{
-			get_error(datash, 126);
+			_error(datash, 126);
 			return (1);
 		}
 	}
@@ -170,13 +170,13 @@ int cmd_exec(data_shell *datash)
 	char *dir;
 	(void) wpd;
 
-	exec = is_executable(datash);
+	exec = executable(datash);
 	if (exec == -1)
 		return (1);
 	if (exec == 0)
 	{
-		dir = _which(datash->args[0], datash->_environ);
-		if (check_error_cmd(dir, datash) == 1)
+		dir = loc_cmd(datash->args[0], datash->_environ);
+		if (check_error(dir, datash) == 1)
 			return (1);
 	}
 
@@ -184,7 +184,7 @@ int cmd_exec(data_shell *datash)
 	if (pd == 0)
 	{
 		if (exec == 0)
-			dir = _which(datash->args[0], datash->_environ);
+			dir = loc_cmd(datash->args[0], datash->_environ);
 		else
 			dir = datash->args[0];
 		execve(dir + exec, datash->args, datash->_environ);

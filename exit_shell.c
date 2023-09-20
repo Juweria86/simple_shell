@@ -1,12 +1,12 @@
 #include "shell.h"
 
 /**
- * exit_shell - exits the shell
+ * myexit - exits the shell
  *
  * @datash: data relevant (status and args)
  * Return: 0 on success.
  */
-int exit_shell(data_shell *datash)
+int myexit(data_shell *datash)
 {
 	unsigned int ustatus;
 	int is_digit;
@@ -21,7 +21,7 @@ int exit_shell(data_shell *datash)
 		big_number = ustatus > (unsigned int)INT_MAX;
 		if (!is_digit || str_len > 10 || big_number)
 		{
-			get_error(datash, 2);
+			_error(datash, 2);
 			datash->status = 2;
 			return (1);
 		}

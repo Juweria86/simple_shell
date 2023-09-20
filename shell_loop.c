@@ -6,7 +6,7 @@
  * @in: input string
  * Return: input without comments
  */
-char *without_comment(char *in)
+char *del_comment(char *in)
 {
 	int i, up_to;
 
@@ -41,7 +41,7 @@ char *without_comment(char *in)
  *
  * Return: no return.
  */
-void shell_loop(data_shell *datash)
+void my_shell(data_shell *datash)
 {
 	int loop, i_eof;
 	char *input;
@@ -49,22 +49,22 @@ void shell_loop(data_shell *datash)
 	loop = 1;
 	while (loop == 1)
 	{
-		write(STDIN_FILENO, "^-^ ", 4);
-		input = read_line(&i_eof);
+		write(STDIN_FILENO, ":) ", 4);
+		input = read_input(&i_eof);
 		if (i_eof != -1)
 		{
-			input = without_comment(input);
+			input = del_comment(input);
 			if (input == NULL)
 				continue;
 
-			if (check_syntax_error(datash, input) == 1)
+			if (check_syntax(datash, input) == 1)
 			{
 				datash->status = 2;
 				free(input);
 				continue;
 			}
-			input = rep_var(input, datash);
-			loop = split_commands(datash, input);
+			input = var_replace(input, datash);
+			loop = parse_cmd(datash, input);
 			datash->counter += 1;
 			free(input);
 		}

@@ -87,7 +87,7 @@ void add_nodes(sep_list **head_s, line_list **head_l, char *input)
  * @datash: data structure
  * Return: no return
  */
-void go_next(sep_list **list_s, line_list **list_l, data_shell *datash)
+void next_cmd(sep_list **list_s, line_list **list_l, data_shell *datash)
 {
 	int loop_sep;
 	sep_list *ls_s;
@@ -129,7 +129,7 @@ void go_next(sep_list **list_s, line_list **list_l, data_shell *datash)
  * @input: input string
  * Return: 0 to exit, 1 to continue
  */
-int split_commands(data_shell *datash, char *input)
+int parse_cmd(data_shell *datash, char *input)
 {
 
 	sep_list *head_s, *list_s;
@@ -147,14 +147,14 @@ int split_commands(data_shell *datash, char *input)
 	while (list_l != NULL)
 	{
 		datash->input = list_l->line;
-		datash->args = split_line(datash->input);
-		loop = exec_line(datash);
+		datash->args = parse_input(datash->input);
+		loop = find_built(datash);
 		free(datash->args);
 
 		if (loop == 0)
 			break;
 
-		go_next(&list_s, &list_l, datash);
+		next_cmd(&list_s, &list_l, datash);
 
 		if (list_l != NULL)
 			list_l = list_l->next;
@@ -174,7 +174,7 @@ int split_commands(data_shell *datash, char *input)
  * @input: input string.
  * Return: string splitted.
  */
-char **split_line(char *input)
+char **parse_input(char *input)
 {
 	size_t bsize;
 	size_t i;

@@ -1,14 +1,14 @@
 #include "shell.h"
 
 /**
- * copy_info - copies info to create
+ * copy_data - copies info to create
  * a new env or alias
  * @name: name (env or alias)
  * @value: value (env or alias)
  *
  * Return: new env or alias.
  */
-char *copy_info(char *name, char *value)
+char *copy_data(char *name, char *value)
 {
 	char *new;
 	int len_name, len_value, len;
@@ -45,7 +45,7 @@ void set_env(char *name, char *value, data_shell *datash)
 		if (_strcmp(name_env, name) == 0)
 		{
 			free(datash->_environ[i]);
-			datash->_environ[i] = copy_info(name_env, value);
+			datash->_environ[i] = copy_data(name_env, value);
 			free(var_env);
 			return;
 		}
@@ -53,7 +53,7 @@ void set_env(char *name, char *value, data_shell *datash)
 	}
 
 	datash->_environ = _reallocdp(datash->_environ, i, sizeof(char *) * (i + 2));
-	datash->_environ[i] = copy_info(name, value);
+	datash->_environ[i] = copy_data(name, value);
 	datash->_environ[i + 1] = NULL;
 }
 
@@ -69,7 +69,7 @@ int _setenv(data_shell *datash)
 
 	if (datash->args[1] == NULL || datash->args[2] == NULL)
 	{
-		get_error(datash, -1);
+		_error(datash, -1);
 		return (1);
 	}
 
@@ -93,7 +93,7 @@ int _unsetenv(data_shell *datash)
 
 	if (datash->args[1] == NULL)
 	{
-		get_error(datash, -1);
+		_error(datash, -1);
 		return (1);
 	}
 	k = -1;
@@ -109,7 +109,7 @@ int _unsetenv(data_shell *datash)
 	}
 	if (k == -1)
 	{
-		get_error(datash, -1);
+		_error(datash, -1);
 		return (1);
 	}
 	realloc_environ = malloc(sizeof(char *) * (i));
