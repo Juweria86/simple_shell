@@ -51,7 +51,7 @@ char *cd_error(data_shell *datash)
 	ver_str = _itoa(datash->counter);
 	if (datash->args[1][0] == '-')
 	{
-		msg = ": option denied";
+		msg = ": option denied ";
 		len_id = 2;
 	}
 	else
