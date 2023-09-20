@@ -161,7 +161,6 @@ int _getline(data_t *info, char **ptr, size_t *length)
 /**
  * signint - blocks ctrl-C
  * @sig_num: the signal number
- *
  * Return: void
  */
 void signint(__attribute__((unused))int sig_num)
