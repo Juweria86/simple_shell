@@ -80,7 +80,7 @@ void add_nodes(sep_list **head_s, line_list **head_l, char *input)
 }
 
 /**
- * go_next - go to the next command line stored
+ * next_cmd - go to the next command line stored
  *
  * @list_s: separator list
  * @list_l: command line list
@@ -122,7 +122,7 @@ void next_cmd(sep_list **list_s, line_list **list_l, data_shell *datash)
 }
 
 /**
- * split_commands - splits command lines according to
+ * parse_cmd - splits command lines according to
  * the separators ;, | and &, and executes them
  *
  * @datash: data structure
@@ -169,7 +169,7 @@ int parse_cmd(data_shell *datash, char *input)
 }
 
 /**
- * split_line - tokenizes the input string
+ * parse_input - tokenizes the input string
  *
  * @input: input string.
  * Return: string splitted.

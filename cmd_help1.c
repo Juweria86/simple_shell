@@ -14,7 +14,7 @@ void jhelp_env(void)
 
 }
 /**
- * aux_help_setenv - Help information for the builtin setenv
+ * jhelp_setenv - Help information for the builtin setenv
  * Return: no return
  */
 void jhelp_setenv(void)
@@ -29,7 +29,7 @@ void jhelp_setenv(void)
 	write(STDOUT_FILENO, help, _strlen(help));
 }
 /**
- * aux_help_unsetenv - Help information for the builtin unsetenv
+ * jhelp_unsetenv - Help information for the builtin unsetenv
  * Return: no return
  */
 void jhelp_unsetenv(void)
@@ -65,7 +65,7 @@ void jhelp_general(void)
 	write(STDOUT_FILENO, help, _strlen(help));
 }
 /**
- * help_exit - Help information fot the builint exit
+ * jhelp_exit - Help information fot the builint exit
  * Return: no return
  */
 void jhelp_exit(void)

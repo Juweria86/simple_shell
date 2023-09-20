@@ -69,7 +69,7 @@ int find_syntax(char *input, int i, char last)
 }
 
 /**
- * first_char - finds index of the first char
+ * index_first - finds index of the first char
  *
  * @input: input string
  * @i: index

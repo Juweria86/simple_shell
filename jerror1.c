@@ -78,7 +78,7 @@ char *cd_error(data_shell *datash)
 }
 
 /**
- * error_not_found - generic error message for command not found
+ * cmd_notfound - generic error message for command not found
  * @datash: data relevant (counter, arguments)
  * Return: Error message
  */
