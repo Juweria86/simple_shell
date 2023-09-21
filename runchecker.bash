@@ -25,14 +25,14 @@ while read -r command; do
 
 	echo -e "${ORANGE}${command}${NC}"
 	output=$(eval "$command")
-    
+
 	if [[ $output == "OK" ]]; then
 		echo -e "${GREEN}${output}${NC}"
 		((ok_count++))
 	else
 		echo "$output"
 	fi
-    
+
 	echo
 	((total_commands++))
 done < "TEST_SUITE/command_list.txt"
