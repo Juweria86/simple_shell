@@ -1,40 +1,40 @@
 #include "shell.h"
 
 /**
- * _strdup - duplicates a str in the heap memory.
- * @s: Type char pointer str
- * Return: duplicated str
+ * _strdup - duplicates a string in the heap memory.
+ * @s: Type character pointer string
+ * Return: duplicated string
  */
 char *_strdup(const char *s)
 {
 	char *new;
-	size_t len;
+	size_t length;
 
 	len = _strlen(s);
-	new = malloc(sizeof(char) * (len + 1));
+	new = malloc(sizeof(char) * (length + 1));
 	if (new == NULL)
 		return (NULL);
-	_memcpy(new, s, len + 1);
+	_memcpy(new, s, length + 1);
 	return (new);
 }
 
 /**
  * _strlen - Returns the lenght of a string.
- * @s: Type char pointer
- * Return: Always 0.
+ * @s: Type character pointer
+ * Return: 0.
  */
 int _strlen(const char *s)
 {
-	int len;
+	int length;
 
-	for (len = 0; s[len] != 0; len++)
+	for (length = 0; s[length] != 0; length++)
 	{
 	}
-	return (len);
+	return (length);
 }
 
 /**
- * cmp_chars - compare chars of strings
+ * cmp_chars - compare characters of strings
  * @str: input string.
  * @delim: delimiter.
  *
@@ -42,20 +42,20 @@ int _strlen(const char *s)
  */
 int cmp_chars(char str[], const char *delim)
 {
-	unsigned int i, j, k;
+	unsigned int i, j, a;
 
-	for (i = 0, k = 0; str[i]; i++)
+	for (i = 0, a = 0; str[i]; i++)
 	{
 		for (j = 0; delim[j]; j++)
 		{
 			if (str[i] == delim[j])
 			{
-				k++;
+				a++;
 				break;
 			}
 		}
 	}
-	if (i == k)
+	if (i == a)
 		return (1);
 	return (0);
 }
@@ -118,11 +118,11 @@ char *_strtok(char str[], const char *delim)
  */
 int _isdigit(const char *s)
 {
-	unsigned int i;
+	unsigned int j;
 
-	for (i = 0; s[i]; i++)
+	for (j = 0; s[j]; j++)
 	{
-		if (s[i] < 48 || s[i] > 57)
+		if (s[j] < 48 || s[j] > 57)
 			return (0);
 	}
 	return (1);

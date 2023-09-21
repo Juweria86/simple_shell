@@ -2,7 +2,7 @@
 
 /**
  * _strcat - concatenate two strings
- * @dest: character pointer the dest 
+ * @dest: character pointer the dest
  * @src: const character pointer the source
  * Return: the dest
  */
