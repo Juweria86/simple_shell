@@ -2,48 +2,45 @@
 
 /**
  * is_env - checks if the typed variable is an env variable
- *
  * @h: head of linked list
  * @in: input string
  * @data: data structure
- * Return: no return
  */
 void is_env(r_var **h, char *in, data_shell *data)
 {
-	int row, chr, j, lval;
+	int row, chr, i, lval;
 	char **_envr;
 
 	_envr = data->_environ;
 	for (row = 0; _envr[row]; row++)
 	{
-		for (j = 1, chr = 0; _envr[row][chr]; chr++)
+		for (i = 1, chr = 0; _envr[row][chr]; chr++)
 		{
 			if (_envr[row][chr] == '=')
 			{
 				lval = _strlen(_envr[row] + chr + 1);
-				add_rvar_node(h, j, _envr[row] + chr + 1, lval);
+				add_rvar_node(h, i, _envr[row] + chr + 1, lval);
 				return;
 			}
 
-			if (in[j] == _envr[row][chr])
-				j++;
+			if (in[i] == _envr[row][chr])
+				i++;
 			else
 				break;
 		}
 	}
 
-	for (j = 0; in[j]; j++)
+	for (i = 0; in[i]; i++)
 	{
-		if (in[j] == ' ' || in[j] == '\t' || in[j] == ';' || in[j] == '\n')
+		if (in[i] == ' ' || in[i] == '\t' || in[i] == ';' || in[i] == '\n')
 			break;
 	}
 
-	add_rvar_node(h, j, NULL, 0);
+	add_rvar_node(h, i, NULL, 0);
 }
 
 /**
  * is_var - check if the typed variable is $$ or $?
- *
  * @h: head of the linked list
  * @in: input string
  * @st: last status of the Shell
@@ -85,7 +82,6 @@ int is_var(r_var **h, char *in, char *st, data_shell *data)
 
 /**
  * rep_input - replaces string into variables
- *
  * @head: head of the linked list
  * @input: input string
  * @new_input: new input string (replaced)
@@ -137,7 +133,6 @@ char *rep_input(r_var **head, char *input, char *new_input, int nlen)
 
 /**
  * var_replace - calls functions to replace string into vars
- *
  * @input: input string
  * @datash: data structure
  * Return: replaced string
