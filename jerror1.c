@@ -51,12 +51,12 @@ char *cd_error(data_shell *datash)
 	ver_str = _itoa(datash->counter);
 	if (datash->args[1][0] == '-')
 	{
-		msg = ": option denied ";
+		msg = ": Illegal option ";
 		len_id = 2;
 	}
 	else
 	{
-		msg = ": Failed to change directory ";
+		msg = ": can't cd to ";
 		len_id = _strlen(datash->args[1]);
 	}
 
@@ -103,7 +103,7 @@ char *cmd_notfound(data_shell *datash)
 	_strcat(error, ver_str);
 	_strcat(error, ": ");
 	_strcat(error, datash->args[0]);
-	_strcat(error, ": command not found\n");
+	_strcat(error, ": not found\n");
 	_strcat(error, "\0");
 	free(ver_str);
 	return (error);
