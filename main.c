@@ -8,11 +8,11 @@
  */
 void free_data(data_shell *datash)
 {
-	unsigned int i;
+	unsigned int j;
 
-	for (i = 0; datash->_environ[i]; i++)
+	for (j = 0; datash->_environ[j]; j++)
 	{
-		free(datash->_environ[i]);
+		free(datash->_environ[j]);
 	}
 
 	free(datash->_environ);
@@ -28,7 +28,7 @@ void free_data(data_shell *datash)
  */
 void set_data(data_shell *datash, char **av)
 {
-	unsigned int i;
+	unsigned int j;
 
 	datash->av = av;
 	datash->input = NULL;
@@ -36,17 +36,17 @@ void set_data(data_shell *datash, char **av)
 	datash->status = 0;
 	datash->counter = 1;
 
-	for (i = 0; environ[i]; i++)
+	for (j = 0; environ[j]; j++)
 		;
 
-	datash->_environ = malloc(sizeof(char *) * (i + 1));
+	datash->_environ = malloc(sizeof(char *) * (j + 1));
 
-	for (i = 0; environ[i]; i++)
+	for (j = 0; environ[j]; j++)
 	{
-		datash->_environ[i] = _strdup(environ[i]);
+		datash->_environ[j] = _strdup(environ[j]);
 	}
 
-	datash->_environ[i] = NULL;
+	datash->_environ[j] = NULL;
 	datash->pid = _itoa(getpid());
 }
 

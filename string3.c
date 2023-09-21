@@ -1,14 +1,14 @@
 #include "shell.h"
 
 /**
- * rev_string - reverses a string.
+ * rev_string - reverses a str.
  * @s: input string.
  * Return: no return.
  */
 void rev_string(char *s)
 {
 	int count = 0, i, j;
-	char *str, temp;
+	char *str, tmp;
 
 	while (count >= 0)
 	{
@@ -22,9 +22,9 @@ void rev_string(char *s)
 	{
 		for (j = i + 1; j > 0; j--)
 		{
-			temp = *(str + j);
+			tmp = *(str + j);
 			*(str + j) = *(str + (j - 1));
-			*(str + (j - 1)) = temp;
+			*(str + (j - 1)) = tmp;
 		}
 	}
 }
