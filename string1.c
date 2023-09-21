@@ -2,8 +2,8 @@
 
 /**
  * _strcat - concatenate two strings
- * @dest: char pointer the dest of the copied str
- * @src: const char pointer the source of str
+ * @dest: character pointer the dest 
+ * @src: const character pointer the source
  * Return: the dest
  */
 char *_strcat(char *dest, const char *src)
@@ -24,40 +24,40 @@ char *_strcat(char *dest, const char *src)
 	return (dest);
 }
 /**
- * *_strcpy - Copies the string pointed to by src.
- * @dest: Type char pointer the dest of the copied str
- * @src: Type char pointer the source of str
+ * *_strcpy - Copies the string pointed
+ * @dest: Type character pointer the dest
+ * @src: Type char pointer the source
  * Return: the dest.
  */
 char *_strcpy(char *dest, char *src)
 {
 
-	size_t a;
+	size_t s;
 
-	for (a = 0; src[a] != '\0'; a++)
+	for (s = 0; src[s] != '\0'; s++)
 	{
-		dest[a] = src[a];
+		dest[s] = src[s];
 	}
-	dest[a] = '\0';
+	dest[s] = '\0';
 
 	return (dest);
 }
 /**
  * _strcmp - Function that compares two strings.
- * @s1: type str compared
- * @s2: type str compared
+ * @s1: type string compared
+ * @s2: type string compared
  * Return: Always 0.
  */
 int _strcmp(char *s1, char *s2)
 {
-	int i;
+	int j;
 
-	for (i = 0; s1[i] == s2[i] && s1[i]; i++)
+	for (j = 0; s1[j] == s2[j] && s1[j]; j++)
 		;
 
-	if (s1[i] > s2[i])
+	if (s1[j] > s2[j])
 		return (1);
-	if (s1[i] < s2[i])
+	if (s1[j] < s2[j])
 		return (-1);
 	return (0);
 }
